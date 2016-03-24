@@ -33,7 +33,7 @@ class TodoApp extends React.Component {
   }
 
   render() {
-    const count = this.state.items.length;
+    const count = this.state.items.filter((item) => !item['checked']).length;
     return (
       <div>
         <section className="todoapp">
