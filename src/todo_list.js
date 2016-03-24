@@ -2,7 +2,8 @@ class TodoApp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      items: []
+      items: [],
+      markAll: false,
     };
   }
 
@@ -11,7 +12,7 @@ class TodoApp extends React.Component {
       if (event.target.value !== '') {
         // this.setState(this.state.items.push(event.target.value))
         this.state.items.push({name: event.target.value, checked: false})
-        this.setState({items: this.state.items})
+        this.setState({items: this.state.items, markAll: false})
         event.target.value = ''
       }
     }
@@ -23,13 +24,30 @@ class TodoApp extends React.Component {
   }
 
   checkItem(idx) {
-    this.state.items[idx]['checked'] = !this.state.items[idx]['checked']
-    this.setState({items: this.state.items})
+    this.state.items[idx]['checked'] = !this.state.items[idx]['checked'];
+    if (this.state.markAll && !this.state.items[idx]['checked'])
+      this.state.markAll = false;
+    this.setState({items: this.state.items,
+                   markAll: this.state.markAll})
   }
 
   clearComplete() {
     this.state.items = this.state.items.filter((item) => !item.checked)
     this.setState({items: this.state.items})
+  }
+
+  markAll(event) {
+    let markAll = this.state.markAll;
+    if (!markAll) {
+      markAll = true
+      this.state.items.forEach((item) => item.checked=true)
+    }
+    else {
+      markAll = false
+      this.state.items.forEach((item) => item.checked=false)
+    }
+    this.setState({items: this.state.items,
+                   markAll: markAll})
   }
 
   render() {
@@ -42,7 +60,7 @@ class TodoApp extends React.Component {
             <input className="new-todo" placeholder="What needs to be done?" onKeyPress={this.createNewItem.bind(this)} autoFocus />
           </header>
           <section className="main">
-            <input className="toggle-all" type="checkbox" />
+            <input className="toggle-all" type="checkbox" onChange={this.markAll.bind(this)} checked={this.state.markAll} />
             <label htmlFor="toggle-all">Mark all as complete</label>
             <ul className="todo-list">
               {this.state.items.map((item, idx) => <TodoItem key={idx} item={item} onDelete={this.deleteItem.bind(this, idx)} onCheck={this.checkItem.bind(this, idx)} />)}
