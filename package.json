@@ -1,13 +1,31 @@
 {
-  "name": "todo-list",
+  "name": "todo-list-react",
   "version": "1.0.0",
-  "scripts": {
-    "build": "babel src -d lib"
-  },
+  "description": "todo list (react & webpack version)",
+  "main": "src/todo_list.js",
+  "dependencies": {},
   "devDependencies": {
-    "babel-cli": "^6.6.5",
+    "babel-loader": "^6.2.4",
     "babel-preset-es2015": "^6.6.0",
-    "babel-preset-react": "^6.5.0"
-  }
+    "babel-preset-react": "^6.5.0",
+    "babel-preset-stage-0": "^6.5.0",
+    "css-loader": "^0.23.1",
+    "react": "^15.0.0",
+    "react-dom": "^15.0.0",
+    "style-loader": "^0.13.1",
+    "webpack": "^1.12.14"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ianlini/todo-list-react.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ianlini/todo-list-react/issues"
+  },
+  "homepage": "https://github.com/ianlini/todo-list-react#readme"
 }
-
